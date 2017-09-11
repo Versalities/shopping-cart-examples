@@ -18,6 +18,11 @@ const Basket = (() =>{
       data.splice(data.indexOf(item),1);
     },
 
+    clear: () => {
+      console.log('Clearing basket')
+      data = [];
+    },
+
     calculatePrice: () => {
       let sum = 0;
       data.forEach((item) => {

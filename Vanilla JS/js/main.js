@@ -1,5 +1,20 @@
 var userBasket = Basket;
 
+var productData;
+
+function createItemsFromData(arg){
+  let limit = arg || 10;
+  let data = MockData(limit);
+
+  productData = data;
+
+  data.forEach((item) => {
+    createItemBar(new Item(item))
+  })
+}
+
+createItemsFromData();
+
 function createItemBar(item){
   //Targeting parent DOM node
    var productsHTML = document.getElementsByClassName('products')[0];
@@ -48,12 +63,6 @@ function Item(item){
   this.item = item;
 }
 
-
-
-MockData(10).forEach((item) => {
-  createItemBar(new Item(item))
-})
-
 function ManageBasket(){
   var place = document.getElementsByClassName('basket')[0];
   place.innerHTML = null;
@@ -64,4 +73,31 @@ function ManageBasket(){
   })
 
   document.getElementsByClassName('total-price')[0].innerHTML = `Total Price: ${userBasket.calculatePrice()}`
+}
+
+function GenerateData(){
+  let value = document.getElementById('data-generator').value;
+  if(value > 0){
+    userBasket.clear();
+    ManageBasket();
+    document.getElementsByClassName('products')[0].innerHTML = null;
+    createItemsFromData(value);
+  } else {
+    alert('Nope! Input value is lesser than 0 or even not a number at all')
+  }
+}
+
+function FilterData(){
+  let value = document.getElementById('data-filter').value;
+  let data = productData.slice();
+  document.getElementsByClassName('products')[0].innerHTML = null;
+  if(value.length > 0){
+  data.filter(i => i.category == value).forEach((i) => {
+      createItemBar(new Item(i))
+  })
+} else {
+  productData.forEach((i) => {
+      createItemBar(new Item(i))
+  })
+}
 }
