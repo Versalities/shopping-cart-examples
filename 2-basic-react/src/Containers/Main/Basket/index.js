@@ -7,7 +7,11 @@ export default class Basket extends Component {
     return (
       <div>
         <h2>Basket</h2>
-        <div></div>
+        <div>
+          {this.props.products && this.props.products.map((item) => {
+            item.taken == true
+          })}
+          </div>
         <div>
           Total Price: 0
         </div>

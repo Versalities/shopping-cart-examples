@@ -22,16 +22,17 @@ class App extends Component {
   }
 
   generateData = (arg) => {
+    if(arg){
     this.setState({
       productsData: MockData(arg),
     })
   }
+  }
 
-
-  setFilter = (arg) => {
-    this.setState({
-      dataFilter: arg
-    })
+  prepareData = () => {
+    return this.state.productsData.map( item =>
+      Object.assign(item, item.taken = false)
+    )
   }
 
   render() {
@@ -39,9 +40,8 @@ class App extends Component {
       <div>
         <Header />
         <Main
-          products={this.state.productsData}
+          products={this.prepareData()}
           generateData = {this.generateData}
-          setFilter = {this.setFilter}
           />
         </div>
     );

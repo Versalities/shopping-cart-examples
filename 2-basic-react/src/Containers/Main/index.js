@@ -24,7 +24,7 @@ export default class Main extends Component {
   }
 
   filterData = () => {
-    var filterMatch = new RegExp(this.state.dataFilter, 'i');
+    let filterMatch = new RegExp(this.state.dataFilter, 'i');
 
     return this.state.products.filter(item => filterMatch.test(item.category) );
   }
@@ -35,8 +35,24 @@ export default class Main extends Component {
     })
   }
 
+  addItem = (id) => {
+    let pos;
+    this.state.products.some((item, i) => {
+        if(item.id == id){
+          pos = i;
+          return true
+        }
+      })
+
+    this.setState({
+      products: [...this.state.products, this.state.products[pos].taken = true]
+    })
+
+  }
+
 
   render(){
+    console.log(this.state.products)
     return (
       <main>
         <Controls
@@ -44,9 +60,12 @@ export default class Main extends Component {
           generateData={this.props.generateData}
           />
 
-        <Products products={this.filterData()}/>
+        <Products
+          products={this.filterData()}
+          addItem={this.addItem}
+          />
 
-        <Basket />
+        <Basket products={this.state.products}/>
       </main>
     )
   }

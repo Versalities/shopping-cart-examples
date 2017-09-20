@@ -9,7 +9,11 @@ export default class Products extends Component {
       <div>
         <h2>Products</h2>
         <div>
-          {this.props.products.map(item => <Item key={_.random(1, Number.MAX_VALUE)} data={item} />)}
+          {this.props.products.map(item => <Item
+            key={_.random(1, Number.MAX_VALUE)}
+            data={item}
+            addItem={this.props.addItem}
+            />)}
           </div>
       </div>
     )
@@ -17,14 +21,17 @@ export default class Products extends Component {
 }
 
 class Item extends Component {
+
+
   render(){
-    const { title, category, price } = this.props.data
+    const { id, title, category, price } = this.props.data
+
     return (
       <div className='item-bar'>
         <h3>{title}</h3>
         <p>{category}</p>
         <h5>{price}</h5>
-        <button>Add</button>
+        <button onClick={() => this.props.addItem(id)}>Add</button>
         </div>
     )
   }
