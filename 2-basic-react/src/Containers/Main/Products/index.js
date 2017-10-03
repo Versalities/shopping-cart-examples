@@ -10,6 +10,7 @@ export default class Products extends Component {
         <h2>Products</h2>
         <div>
           {this.props.products.map(item => (<Item
+            key={item.id}
             data={item}
             manageBasket={this.props.manageBasket}
             />))}
@@ -20,28 +21,12 @@ export default class Products extends Component {
 }
 
 class Item extends Component {
-  constructor(){
-    super();
-    this.state = {
-      status: 'inactive',
-      text: 'Add',
-    }
-  }
-
- switchState = () => {
-   this.setState({
-     active: (this.state.active === 'inactive' ? 'active' : 'inactive'),
-     text: (this.state.text === 'Add' ? 'Remove' : 'Add')
-   })
- }
 
  addItem = () => {
-   this.switchState();
    this.props.manageBasket(this.props.data);
  }
 
  removeItem = () => {
-   this.switchState();
    this.props.manageBasket(this.props.data);
  }
 
@@ -50,7 +35,7 @@ class Item extends Component {
      <button onClick={() => {
           this.addItem()
        } }
-           >{this.state.text}
+           >Add
          </button>
    )
  }
@@ -60,20 +45,20 @@ class Item extends Component {
      <button onClick={() => {
           this.removeItem()
        } }
-           >{this.state.text}
+           >Remove
          </button>
    )
  }
 
   render(){
-    const { title, category, price } = this.props.data
+    const { title, category, price, status } = this.props.data
 
     return (
       <div className='item-bar'>
         <h3>{title}</h3>
         <p>{category}</p>
         <h5>{price}</h5>
-        {this.state.active === 'inactive' ? this.renderRemoveButton() : this.renderAddButton()}
+        {status === 'active' ? this.renderRemoveButton() : this.renderAddButton()}
         </div>
     )
   }

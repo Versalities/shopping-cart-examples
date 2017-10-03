@@ -23,11 +23,31 @@ class App extends Component {
 
   generateData = (arg) => {
     if(arg){
+      let data = MockData(arg);
+
+      data.forEach((item) => {
+        item.status = 'inactive'
+      })
+
     this.setState({
-      productsData: MockData(arg),
+      productsData: data,
       basketData: [],
     })
   }
+  }
+
+  changeItemActivity = (item) => {
+    let { productsData } = this.state;
+
+    const index = productsData.indexOf(item);
+
+    productsData[index].status === 'inactive' ?
+      productsData[index].status = 'active' :
+        productsData[index].status = 'inactive'
+
+        this.setState({
+          productsData: productsData
+        })
   }
 
   manageBasket = (item) => {
@@ -43,6 +63,8 @@ class App extends Component {
     this.setState({
       basketData: basketData
     })
+
+    this.changeItemActivity(item)
   }
 
 
