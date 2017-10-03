@@ -1,0 +1,15 @@
+main {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+
+.item-bar {
+  display: inline-block;
+  margin:5px;
+  border:1px solid black;
+  padding:2px;
+}

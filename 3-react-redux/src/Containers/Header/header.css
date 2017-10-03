@@ -1,0 +1,15 @@
+header {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding:14px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: black;
+  color:white;
+  background: #2693bf;
+  background: -moz-linear-gradient(-45deg, #2693bf 0%, #2a58e0 31%, #4d1cb5 54%, #8571ce 85%);
+  background: -webkit-linear-gradient(-45deg, #2693bf 0%,#2a58e0 31%,#4d1cb5 54%,#8571ce 85%);
+  background: linear-gradient(135deg, #2693bf 0%,#2a58e0 31%,#4d1cb5 54%,#8571ce 85%);
+}
