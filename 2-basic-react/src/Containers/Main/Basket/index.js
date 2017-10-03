@@ -22,7 +22,7 @@ export default class Basket extends Component {
         <div>
           {data.map((i) => {
             return (
-              <div>
+              <div key={i.id}>
                 <span> {i.title} : {i.price} </span>
               </div>
             )
