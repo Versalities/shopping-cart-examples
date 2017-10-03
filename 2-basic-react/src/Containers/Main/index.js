@@ -35,24 +35,8 @@ export default class Main extends Component {
     })
   }
 
-  addItem = (id) => {
-    let pos;
-    this.state.products.some((item, i) => {
-        if(item.id == id){
-          pos = i;
-          return true
-        }
-      })
-
-    this.setState({
-      products: [...this.state.products, this.state.products[pos].taken = true]
-    })
-
-  }
-
 
   render(){
-    console.log(this.state.products)
     return (
       <main>
         <Controls
@@ -62,10 +46,10 @@ export default class Main extends Component {
 
         <Products
           products={this.filterData()}
-          addItem={this.addItem}
+          manageBasket={this.props.manageBasket}
           />
 
-        <Basket products={this.state.products}/>
+        <Basket basketData={this.props.basketData}/>
       </main>
     )
   }

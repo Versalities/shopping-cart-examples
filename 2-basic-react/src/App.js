@@ -13,7 +13,7 @@ class App extends Component {
     super();
     this.state = {
       productsData : [],
-      dataFilter: "",
+      basketData: [],
     }
   }
 
@@ -25,23 +25,36 @@ class App extends Component {
     if(arg){
     this.setState({
       productsData: MockData(arg),
+      basketData: [],
     })
   }
   }
 
-  prepareData = () => {
-    return this.state.productsData.map( item =>
-      Object.assign(item, item.taken = false)
-    )
+  manageBasket = (item) => {
+    let { basketData } = this.state;
+
+    const index = basketData.indexOf(item);
+    if (index >= 0) {
+      basketData.splice(index, 1);
+    } else {
+      basketData.push(item)
+    }
+
+    this.setState({
+      basketData: basketData
+    })
   }
+
 
   render() {
     return (
       <div>
         <Header />
         <Main
-          products={this.prepareData()}
+          products={this.state.productsData}
           generateData = {this.generateData}
+          manageBasket = {this.manageBasket}
+          basketData = {this.state.basketData}
           />
         </div>
     );
