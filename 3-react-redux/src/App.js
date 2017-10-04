@@ -26,29 +26,9 @@ class App extends Component {
 
   generateData = (arg) => {
     if(arg){
-      let data = MockData(arg);
-
-      data.forEach((item) => {
-        item.status = 'inactive'
-      })
-
-      this.props.generateData(data)
+      this.props.generateData(MockData(arg))
     }
   }
-
-/*  changeItemActivity = (item) => {
-    let { productsData } = this.state;
-
-    const index = productsData.indexOf(item);
-
-    productsData[index].status === 'inactive' ?
-      productsData[index].status = 'active' :
-        productsData[index].status = 'inactive'
-
-        this.setState({
-          productsData: productsData
-        })
-  } */
 
   render() {
     return (

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+//components
+import Item from '../../../Components/ItemBar'
+
 //actions
 import { addItem, removeItem } from '../../../Redux/Actions/basketActions'
 
@@ -19,50 +22,6 @@ class Products extends Component {
             />))}
           </div>
       </div>
-    )
-  }
-}
-
-class Item extends Component {
-
- addItem = () => {
-   this.props.addItem(this.props.data);
- }
-
- removeItem = () => {
-   this.props.removeItem(this.props.data);
- }
-
- renderAddButton = () => {
-   return (
-     <button onClick={() => {
-          this.addItem()
-       } }
-           >Add
-         </button>
-   )
- }
-
- renderRemoveButton = () => {
-   return (
-     <button onClick={() => {
-          this.removeItem()
-       } }
-           >Remove
-         </button>
-   )
- }
-
-  render(){
-    const { title, category, price, status } = this.props.data
-
-    return (
-      <div className='item-bar'>
-        <h3>{title}</h3>
-        <p>{category}</p>
-        <h5>{price}</h5>
-        {status === 'active' ? this.renderRemoveButton() : this.renderAddButton()}
-        </div>
     )
   }
 }
