@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { observer, inject } from 'mobx-react'
 import './App.css';
 
 //containers
@@ -8,14 +9,7 @@ import Main from './Containers/Main'
 //services
 import MockData from './Services/Generator/mockdata'
 
-class App extends Component {
-  constructor(){
-    super();
-    this.state = {
-      productsData : [],
-      basketData: [],
-    }
-  }
+@inject("store") @observer class App extends Component {
 
   componentWillMount(){
     this.generateData(10);
@@ -29,54 +23,19 @@ class App extends Component {
         item.status = 'inactive'
       })
 
-    this.setState({
-      productsData: data,
-      basketData: [],
-    })
+      this.props.store.generateProducts(data)
   }
   }
-
-  changeItemActivity = (item) => {
-    let { productsData } = this.state;
-
-    const index = productsData.indexOf(item);
-
-    productsData[index].status === 'inactive' ?
-      productsData[index].status = 'active' :
-        productsData[index].status = 'inactive'
-
-        this.setState({
-          productsData: productsData
-        })
-  }
-
-  manageBasket = (item) => {
-    let { basketData } = this.state;
-
-    const index = basketData.indexOf(item);
-    if (index >= 0) {
-      basketData.splice(index, 1);
-    } else {
-      basketData.push(item)
-    }
-
-    this.setState({
-      basketData: basketData
-    })
-
-    this.changeItemActivity(item)
-  }
-
 
   render() {
+    const { store } = this.props;
     return (
       <div>
         <Header />
         <Main
-          products={this.state.productsData}
+          products={store.products}
           generateData = {this.generateData}
-          manageBasket = {this.manageBasket}
-          basketData = {this.state.basketData}
+          basketData = {store.basket}
           />
         </div>
     );

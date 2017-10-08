@@ -1,20 +1,11 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 
 
-export default class Basket extends Component {
-
-  calculatePrice = () => {
-    const data = this.props.basketData;
-    let sum = 0;
-    data.forEach((item) => {
-      sum += item.price
-    });
-
-    return sum
-  }
-
+@inject("store") @observer class Basket extends Component {
+  
   render(){
-    const data = this.props.basketData;
+    const data = this.props.store.basket;
 
     return (
       <div>
@@ -29,9 +20,11 @@ export default class Basket extends Component {
           })}
           </div>
         <div>
-          Total Price: {this.calculatePrice()}
+          Total Price: {this.props.store.totalPrice}
         </div>
       </div>
     )
   }
 }
+
+export default Basket

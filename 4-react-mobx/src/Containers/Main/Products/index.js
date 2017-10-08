@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 
-export default class Products extends Component {
+//components
+import Item from '../../../Components/ItemBar'
+
+@inject("store") @observer class Products extends Component {
 
   render(){
+    console.log('ПРодукты',this.props.products )
+    const { store } = this.props;
     return (
       <div>
         <h2>Products</h2>
@@ -10,7 +16,8 @@ export default class Products extends Component {
           {this.props.products.map(item => (<Item
             key={item.id}
             data={item}
-            manageBasket={this.props.manageBasket}
+            addItem = {store.addItem}
+            removeItem = {store.removeItem}
             />))}
           </div>
       </div>
@@ -18,46 +25,4 @@ export default class Products extends Component {
   }
 }
 
-class Item extends Component {
-
- addItem = () => {
-   this.props.manageBasket(this.props.data);
- }
-
- removeItem = () => {
-   this.props.manageBasket(this.props.data);
- }
-
- renderAddButton = () => {
-   return (
-     <button onClick={() => {
-          this.addItem()
-       } }
-           >Add
-         </button>
-   )
- }
-
- renderRemoveButton = () => {
-   return (
-     <button onClick={() => {
-          this.removeItem()
-       } }
-           >Remove
-         </button>
-   )
- }
-
-  render(){
-    const { title, category, price, status } = this.props.data
-
-    return (
-      <div className='item-bar'>
-        <h3>{title}</h3>
-        <p>{category}</p>
-        <h5>{price}</h5>
-        {status === 'active' ? this.renderRemoveButton() : this.renderAddButton()}
-        </div>
-    )
-  }
-}
+export default Products
