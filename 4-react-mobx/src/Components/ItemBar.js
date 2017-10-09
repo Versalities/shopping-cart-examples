@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { observer } from 'mobx-react'
 
-export default class Item extends Component {
+@observer class Item extends Component {
 
  renderAddButton = () => {
    return (
@@ -35,3 +36,5 @@ export default class Item extends Component {
     )
   }
 }
+
+export default Item;

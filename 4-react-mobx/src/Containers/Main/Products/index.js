@@ -7,7 +7,6 @@ import Item from '../../../Components/ItemBar'
 @inject("store") @observer class Products extends Component {
 
   render(){
-    console.log('ПРодукты',this.props.products )
     const { store } = this.props;
     return (
       <div>

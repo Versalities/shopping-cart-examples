@@ -16,7 +16,6 @@ export default class Main extends Component {
   }
 
   componentWillReceiveProps(newProps){
-    console.log('новые пропсы', newProps)
     if(newProps.products !== this.state.products){
       this.setState({
         products: newProps.products
