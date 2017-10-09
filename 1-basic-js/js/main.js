@@ -1,14 +1,10 @@
 var userBasket = Basket;
 
-var productData;
-
 function createItemsFromData(arg){
-  let limit = arg || 10;
-  let data = MockData(limit);
 
-  productData = data;
+  dataGenerate(arg)
 
-  data.forEach((item) => {
+  productData.forEach((item) => {
     createItemBar(new Item(item))
   })
 }
@@ -28,18 +24,27 @@ function createItemBar(item){
 
    var innerCategory = FactoryHTML('h5', 'item-category', `Category: ${item.category}`);
 
-   var button = FactoryHTML('button', 'button-add', 'Добавить');
+   var button = FactoryHTML(
+   'button',
+   'button-add',
+   (item.status == 'inactive' ? 'Add' : 'Remove')
+  );
 
    button.onclick = function(){
-     if(this.className == 'button-add'){
-       userBasket.addItem(item.item);
+     console.log(item)
+     if(item.status == 'inactive'){
+       dataSwitchStatus(item.id);
+       item.status = 'active'
+       userBasket.addItem(item);
        ManageBasket();
-       button.innerHTML = 'Убрать';
+       button.innerHTML = 'Remove';
        button.className = 'button-remove';
      } else {
-       userBasket.removeItem(item.item);
+       dataSwitchStatus(item.id);
+       userBasket.removeItem(item);
+       item.status = 'inactive'
        ManageBasket();
-       button.innerHTML = 'Добавить';
+       button.innerHTML = 'Add';
        button.className = 'button-add';
      }
    }
@@ -59,8 +64,8 @@ function Item(item){
   this.title = item.title;
   this.category = item.category;
   this.price = item.price;
+  this.status = item.status
 
-  this.item = item;
 }
 
 function ManageBasket(){
@@ -83,21 +88,17 @@ function GenerateData(){
     document.getElementsByClassName('products')[0].innerHTML = null;
     createItemsFromData(value);
   } else {
-    alert('Nope! Input value is lesser than 0 or even not a number at all')
+    alert('Nope! Input value is lesser than 0 or not even a number at all')
   }
 }
 
 function FilterData(){
   let value = document.getElementById('data-filter').value;
-  let data = productData.slice();
+  let filteredData = dataFilter(value)
+
   document.getElementsByClassName('products')[0].innerHTML = null;
-  if(value.length > 0){
-  data.filter(i => i.category == value).forEach((i) => {
+
+  filteredData.forEach((i) => {
       createItemBar(new Item(i))
-  })
-} else {
-  productData.forEach((i) => {
-      createItemBar(new Item(i))
-  })
-}
+    })
 }

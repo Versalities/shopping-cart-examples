@@ -18,8 +18,7 @@
         <input type='number' id='data-generator' />
         <button onclick='GenerateData()'>Generate</button>
         <h5>Filter Data By Category</h5>
-        <input type='text' id='data-filter' />
-        <button onclick="FilterData()">Filter</button>
+        <input oninput="FilterData()" type='text' id='data-filter' />
       </div>
 
       <div>
@@ -38,6 +37,7 @@
     <script src='./js/factoryHTML.js'></script>
     <script src='./js/basket.js'> </script>
     <script src='./js/mockdata.js'> </script>
+    <script src='./js/dataActions.js'> </script>
     <script src='./js/main.js'> </script>
   </body>
 </html>
