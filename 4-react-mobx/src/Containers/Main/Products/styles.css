@@ -1,0 +1,49 @@
+.products-bar {
+  max-width: 70%;
+}
+
+.products-bar > h2 {
+  text-align: center;
+}
+
+.item-bar {
+  min-width: 15%;
+  padding:0;
+}
+
+.item-bar-remove {
+  background-color:green;
+  color:white;
+}
+
+.item-bar > .item-title {
+  margin-top:0;
+  border-bottom:1px solid black;
+  padding:1px;
+  text-align: center;
+}
+
+.item-bar > .item-price {
+  margin:0;
+  font-size:15px;
+}
+
+.item-bar > .item-category {
+  margin:0;
+  font-size:15px;
+}
+
+.item-bar > button {
+  display:block;
+  width:100%;
+  cursor: pointer;
+  border:none;
+  padding:5px;
+  background-color:green;
+  color:white;
+  outline:none;
+}
+
+.item-bar > .button-remove {
+    background-color:red;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import './styles.css'
 
 
 
@@ -19,7 +20,7 @@ class Basket extends Component {
     const data = this.props.basket;
 
     return (
-      <div>
+      <div className='basket-bar'>
         <h2>Basket</h2>
         <div>
           {data.map((i) => {

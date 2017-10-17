@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import './styles.css'
 
 //components
 import Item from '../../../Components/ItemBar'
@@ -9,9 +10,9 @@ import Item from '../../../Components/ItemBar'
   render(){
     const { store } = this.props;
     return (
-      <div>
+      <div className='products-bar'>
         <h2>Products</h2>
-        <div>
+        <div className='products'>
           {this.props.products.map(item => (<Item
             key={item.id}
             data={item}

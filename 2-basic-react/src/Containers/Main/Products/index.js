@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import './styles.css'
 
 export default class Products extends Component {
 
   render(){
     return (
-      <div>
+      <div className='products-bar'>
         <h2>Products</h2>
-        <div>
+        <div className='products'>
           {this.props.products.map(item => (<Item
             key={item.id}
             data={item}
@@ -30,7 +31,7 @@ class Item extends Component {
 
  renderAddButton = () => {
    return (
-     <button onClick={() => {
+     <button className = 'button-add' onClick={() => {
           this.addItem()
        } }
            >Add
@@ -40,7 +41,7 @@ class Item extends Component {
 
  renderRemoveButton = () => {
    return (
-     <button onClick={() => {
+     <button className = 'button-remove' onClick={() => {
           this.removeItem()
        } }
            >Remove
@@ -50,12 +51,13 @@ class Item extends Component {
 
   render(){
     const { title, category, price, status } = this.props.data
+    let barStatus = (status === 'active' ? 'item-bar-remove' : 'item-bar-add')
 
     return (
-      <div className='item-bar'>
-        <h3>{title}</h3>
-        <p>{category}</p>
-        <h5>{price}</h5>
+      <div className={`item-bar ${barStatus}`} >
+        <h3 className='item-title'>{title}</h3>
+        <p className='item-category'>Category: {category}</p>
+        <h5 className='item-price'>Price: {price}</h5>
         {status === 'active' ? this.renderRemoveButton() : this.renderAddButton()}
         </div>
     )

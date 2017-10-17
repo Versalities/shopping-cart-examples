@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './styles.css'
 
 
 export default class Basket extends Component {
@@ -17,7 +18,7 @@ export default class Basket extends Component {
     const data = this.props.basketData;
 
     return (
-      <div>
+      <div className='basket-bar'>
         <h2>Basket</h2>
         <div>
           {data.map((i) => {

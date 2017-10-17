@@ -16,7 +16,12 @@ function createItemBar(item){
    var productsHTML = document.getElementsByClassName('products')[0];
 
    //Creating elements
-   var outerDiv = FactoryHTML('div', 'item-bar');
+   let outerDivStyle = (item.status === 'inactive' ?
+   'item-bar item-bar-add' :
+   'item-bar item-bar-remove'
+ )
+
+   var outerDiv = FactoryHTML('div', outerDivStyle);
 
    var innerTitle = FactoryHTML('h3', 'item-title', item.title);
 
@@ -39,6 +44,7 @@ function createItemBar(item){
        ManageBasket();
        button.innerHTML = 'Remove';
        button.className = 'button-remove';
+       outerDiv.className = 'item-bar item-bar-remove'
      } else {
        dataSwitchStatus(item.id);
        userBasket.removeItem(item);
@@ -46,6 +52,7 @@ function createItemBar(item){
        ManageBasket();
        button.innerHTML = 'Add';
        button.className = 'button-add';
+       outerDiv.className = 'item-bar item-bar-add'
      }
    }
 

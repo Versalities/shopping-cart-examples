@@ -1,0 +1,26 @@
+.controls {
+  min-width: 15%;
+  padding-left: 10px;
+}
+
+.controls > h2 {
+  text-align: center;
+}
+
+.controls > input {
+  border:1px solid black;
+  padding:2px;
+  outline:none;
+}
+#data-generator {
+    border-right:none;
+}
+
+.controls > button {
+  background-color: white;
+  border:1px solid black;
+  cursor:pointer;
+  padding:2px;
+  margin-left:-4px;
+  outline:none;
+}

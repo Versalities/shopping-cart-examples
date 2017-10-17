@@ -5,7 +5,7 @@ import { observer } from 'mobx-react'
 
  renderAddButton = () => {
    return (
-     <button onClick={() => {
+     <button className = 'button-add' onClick={() => {
           this.props.addItem(this.props.data);
        } }
            >Add
@@ -15,7 +15,7 @@ import { observer } from 'mobx-react'
 
  renderRemoveButton = () => {
    return (
-     <button onClick={() => {
+     <button className = 'button-remove' onClick={() => {
           this.props.removeItem(this.props.data);
        } }
            >Remove
@@ -25,12 +25,13 @@ import { observer } from 'mobx-react'
 
   render(){
     const { title, category, price, status } = this.props.data
+    let barStatus = (status === 'active' ? 'item-bar-remove' : 'item-bar-add')
 
     return (
-      <div className='item-bar'>
-        <h3>{title}</h3>
-        <p>{category}</p>
-        <h5>{price}</h5>
+      <div className={`item-bar ${barStatus}`}>
+        <h3 className='item-title'>{title}</h3>
+        <p className='item-category'>Category: {category}</p>
+        <h5 className='item-price'>Price: {price}</h5>
         {status === 'active' ? this.renderRemoveButton() : this.renderAddButton()}
         </div>
     )
