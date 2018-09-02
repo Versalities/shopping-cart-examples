@@ -20,25 +20,27 @@ class App extends Component {
     }
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.generateData(10);
   }
 
   generateData = (arg) => {
-    if(arg){
+    if (arg) {
       this.props.generateData(MockData(arg))
     }
   }
 
   render() {
+    const {products} = this.props;
+
     return (
       <div>
         <Header />
         <Main
-          products={this.props.products}
-          generateData = {this.generateData}
-          />
-        </div>
+          products={products}
+          generateData={this.generateData}
+        />
+      </div>
     );
   }
 }

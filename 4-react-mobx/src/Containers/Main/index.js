@@ -15,16 +15,16 @@ export default class Main extends Component {
     }
   }
 
-  componentWillReceiveProps(newProps){
-    if(newProps.products !== this.state.products){
+  componentWillReceiveProps(newProps) {
+    if (newProps.products !== this.state.products) {
       this.setState({
         products: newProps.products
       })
     }
   }
 
-  filterData = () => {
-    let filterMatch = new RegExp(this.state.dataFilter, 'i');
+  filterData() {
+    const filterMatch = new RegExp(this.state.dataFilter, 'i');
 
     return this.state.products.filter(item => filterMatch.test(item.category) );
   }
@@ -37,19 +37,19 @@ export default class Main extends Component {
 
 
   render(){
+    const {basketData, generateData, manageBasket} = this.props;
+
     return (
       <main>
         <Controls
           setFilter={this.setFilter}
-          generateData={this.props.generateData}
-          />
-
+          generateData={generateData}
+        />
         <Products
           products={this.filterData()}
-          manageBasket={this.props.manageBasket}
-          />
-
-        <Basket basketData={this.props.basketData}/>
+          manageBasket={manageBasket}
+        />
+        <Basket basketData={basketData}/>
       </main>
     )
   }

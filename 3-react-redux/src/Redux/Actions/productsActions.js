@@ -1,8 +1,7 @@
 export function generateData(data) {
-
-  data.forEach((i) => {
-    i.status = 'inactive'
-  })
+  for (let item of data) {
+    item.stats = 'inactive'
+  }
 
   return {
     type: 'GENERATE_DATA',

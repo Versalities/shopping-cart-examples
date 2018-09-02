@@ -11,33 +11,36 @@ import MockData from './Services/Generator/mockdata'
 
 @inject("store") @observer class App extends Component {
 
-  componentWillMount(){
+  componentWillMount() {
     this.generateData(10);
   }
 
   generateData = (arg) => {
-    if(arg){
+    const {store} = this.props;
+
+    if (arg) {
       let data = MockData(arg);
 
-      data.forEach((item) => {
+      for (let item of data) {
         item.status = 'inactive'
-      })
+      }
 
-      this.props.store.generateProducts(data)
-  }
+      store.generateProducts(data);
+    }
   }
 
   render() {
-    const { store } = this.props;
+    const {store: {basket, products}} = this.props;
+
     return (
       <div>
         <Header />
         <Main
-          products={store.products}
-          generateData = {this.generateData}
-          basketData = {store.basket}
-          />
-        </div>
+          products={products}
+          generateData={this.generateData}
+          basketData={basket}
+        />
+      </div>
     );
   }
 }

@@ -9,18 +9,21 @@ import Item from '../../../Components/ItemBar'
 import { addItem, removeItem } from '../../../Redux/Actions/basketActions'
 
 class Products extends Component {
+  render() {
+    const {addItem, removeItem, products} = this.props;
 
-  render(){
     return (
       <div className='products-bar'>
         <h2>Products</h2>
         <div className='products'>
-          {this.props.products.map(item => (<Item
-            key={item.id}
-            data={item}
-            addItem = {this.props.addItem}
-            removeItem = {this.props.removeItem}
-            />))}
+          {products.map(item => (
+            <Item
+              key={item.id}
+              data={item}
+              addItem={addItem}
+              removeItem={removeItem}
+            />
+          ))}
           </div>
       </div>
     )

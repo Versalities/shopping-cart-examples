@@ -6,18 +6,18 @@ const productsReducer = (state = INITIAL_STATE, action) => {
       return state = action.payload;
     case 'ADD_ITEM':
       return state = state.map((i) => {
-	       if(i.id === action.payload.id) {
-           return {...i, status : 'active'}
-         } else {
-           return {...i}
-         }
-       })
+        if(i.id === action.payload.id) {
+          return {...i, status : 'active'};
+        } else {
+          return {...i};
+        }
+      })
     case 'REMOVE_ITEM':
       return state = state.map((i) => {
         if(i.id === action.payload.id) {
-          return {...i, status : 'inactive'}
+          return {...i, status : 'inactive'};
         } else {
-          return {...i}
+          return {...i};
         }
       })
     default:

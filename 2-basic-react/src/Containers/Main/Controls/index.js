@@ -17,20 +17,26 @@ export default class Controls extends Component {
   }
 
   render(){
+    const {generateData, setFilter} = this.props;
+
     return (
         <div className='controls'>
           <h2>Controls</h2>
           <h5>Generate Specific Amount of Data</h5>
-          <input type='number'
+          <input
+            type='number'
             onChange={(e) => this.handleNumInput(e.target.value)}
-            />
+          />
           <button
-            onClick={()=>this.props.generateData(this.state.inputData)}
-            >Generate</button>
+            onClick={() => generateData(this.state.inputData)}
+          >
+            Generate
+          </button>
           <h5>Filter Data By Category</h5>
-          <input type='text'
-            onChange={(e) => this.props.setFilter(e.target.value)}
-            />
+          <input
+            type='text'
+            onChange={(e) => setFilter(e.target.value)}
+          />
         </div>
     )
   }

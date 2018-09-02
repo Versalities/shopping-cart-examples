@@ -6,20 +6,22 @@ import './styles.css'
 import Item from '../../../Components/ItemBar'
 
 @inject("store") @observer class Products extends Component {
-
   render(){
-    const { store } = this.props;
+    const {store: {addItem, removeItem}, products} = this.props;
+
     return (
       <div className='products-bar'>
         <h2>Products</h2>
         <div className='products'>
-          {this.props.products.map(item => (<Item
-            key={item.id}
-            data={item}
-            addItem = {store.addItem}
-            removeItem = {store.removeItem}
-            />))}
-          </div>
+          {products.map(item => (
+            <Item
+              key={item.id}
+              data={item}
+              addItem={addItem}
+              removeItem={removeItem}
+            />
+          ))}
+        </div>
       </div>
     )
   }

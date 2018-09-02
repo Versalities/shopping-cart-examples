@@ -7,7 +7,7 @@ import Products from './Products'
 import Basket from './Basket'
 
 export default class Main extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       products: props.products,
@@ -15,39 +15,39 @@ export default class Main extends Component {
     }
   }
 
-  componentWillReceiveProps(newProps){
-    if(newProps.products !== this.state.products){
+  componentWillReceiveProps(newProps) {
+    if (newProps.products !== this.state.products) {
       this.setState({
         products: newProps.products
       })
     }
   }
 
-  filterData = () => {
+  filterData() {
     let filterMatch = new RegExp(this.state.dataFilter, 'i');
 
-    return this.state.products.filter(item => filterMatch.test(item.category) );
+    return this.state.products.filter(item => filterMatch.test(item.category));
   }
 
   setFilter = (arg) => {
     this.setState({
-      dataFilter:arg
+      dataFilter: arg
     })
   }
 
 
-  render(){
+  render() {
+    const {generateData} = this.props;
+
     return (
       <main>
         <Controls
           setFilter={this.setFilter}
-          generateData={this.props.generateData}
-          />
-
+          generateData={generateData}
+        />
         <Products
           products={this.filterData()}
-          />
-
+        />
         <Basket />
       </main>
     )

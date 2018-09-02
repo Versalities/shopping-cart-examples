@@ -1,6 +1,6 @@
 const Basket = (() =>{
   //closure
-  var data = [];
+  let data = [];
 
   //public api
   return {
@@ -28,8 +28,8 @@ const Basket = (() =>{
       data.forEach((item) => {
         sum += item.price
       });
+
       return sum;
     }
-  }
-
+  };
 })()

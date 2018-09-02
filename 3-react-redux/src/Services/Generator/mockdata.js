@@ -2,12 +2,12 @@ import _ from 'lodash';
 //Function to generate some simple mock data.
 const MockData = (arg) => {
   //variable to limit the amount of items in the array
-  var bar = arg || _.random(1, 100);
+  const bar = arg || _.random(1, 100);
   //list of items, will be returned
-  var data = [];
+  let data = [];
 
   //function to assign random category to the item
-  function assignCategory(){
+  function assignCategory() {
     var categories = [
       'Sport',
       'Techonology',
@@ -24,10 +24,10 @@ const MockData = (arg) => {
   }
 
   //just as the function above, only with a price for an item
-  function assignprice(category){
+  function assignprice(category) {
     let price = _.random(100, 10000)
     //assining some multipliers to the initial price, for fun
-    switch(category){
+    switch (category) {
       case 'Sport':
         return price * 1.5;
       case 'Techonology':
@@ -44,12 +44,12 @@ const MockData = (arg) => {
   }
 
 //Building our resulting mock data array
-  for(let i = 1; i <= bar; i++){
+  for (let i = 1; i <= bar; i++) {
     data.push({
-      id:i,
+      id: i,
       title: `Product №${i}`,
       category: assignCategory(),
-      price:assignprice(this.category)
+      price: assignprice(this.category)
     })
   }
 

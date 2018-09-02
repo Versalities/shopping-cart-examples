@@ -3,36 +3,41 @@ import { observer } from 'mobx-react'
 
 @observer class Item extends Component {
 
- renderAddButton = () => {
-   return (
-     <button className = 'button-add' onClick={() => {
-          this.props.addItem(this.props.data);
-       } }
-           >Add
-         </button>
-   )
- }
+  renderButton(status) {
+    const {addItem, removeItem, data} = this.props;
+    const config = {
+      className: status !== "active" ? "button-add" : "button-remove",
+      action: status !== "active" ? (data) => addItem(data) : (data) => removeItem(data),
+      text: status !== "active" ? "Add" : "Remove"
+    }
 
- renderRemoveButton = () => {
-   return (
-     <button className = 'button-remove' onClick={() => {
-          this.props.removeItem(this.props.data);
-       } }
-           >Remove
-         </button>
-   )
- }
+    return (
+      <button
+        className={config.className}
+        onClick={() => {
+          config.action(data)
+        }}>
+          {config.text}
+      </button>
+    )
+  }
 
-  render(){
-    const { title, category, price, status } = this.props.data
-    let barStatus = (status === 'active' ? 'item-bar-remove' : 'item-bar-add')
+  render() {
+    const {title, category, price, status} = this.props.data;
+    const barStatus = (status === 'active' ? 'item-bar-remove' : 'item-bar-add');
 
     return (
       <div className={`item-bar ${barStatus}`}>
-        <h3 className='item-title'>{title}</h3>
-        <p className='item-category'>Category: {category}</p>
-        <h5 className='item-price'>Price: {price}</h5>
-        {status === 'active' ? this.renderRemoveButton() : this.renderAddButton()}
+        <h3 className='item-title'>
+          {title}
+        </h3>
+        <p className='item-category'>
+          Category: {category}
+        </p>
+        <h5 className='item-price'>
+          Price: {price}
+        </h5>
+          {this.renderButton(status)}
         </div>
     )
   }

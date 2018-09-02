@@ -1,16 +1,17 @@
 import { action, computed, observable } from 'mobx'
 
 class productsStore {
-  @observable products = []
-  @observable basket = []
+  @observable products = [];
+  @observable basket = [];
 
   @computed get totalPrice() {
     let sum = 0;
-    this.basket.forEach((item) => {
-      sum += item.price
-    })
 
-    return sum
+    for (let item of this.basket) {
+      sum += item.price;
+    }
+
+    return sum;
   }
 
   @action generateProducts(data) {
@@ -20,9 +21,9 @@ class productsStore {
 
   @action.bound
   addItem(item) {
-    this.basket.push(item)
+    this.basket.push(item);
 
-    this.changeStatus(item.id)
+    this.changeStatus(item.id);
   }
 
   @action.bound
@@ -32,18 +33,18 @@ class productsStore {
       this.basket.splice(index, 1);
     }
 
-    this.changeStatus(item.id)
+    this.changeStatus(item.id);
   }
 
   @action changeStatus(id) {
-    this.products.forEach((item) => {
-      if(item.id === id) {
+    for (let item of this.products) {
+      if (item.id === id) {
         item.status = (item.status === 'inactive' ? 'active' : 'inactive')
       }
-    })
+    }
   }
 }
 
-var store = window.store = new productsStore()
+var store = window.store = new productsStore();
 
 export default store
